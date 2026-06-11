@@ -1,0 +1,103 @@
+# ============================================================
+# Academic Research Flow - 主配置文件
+# ============================================================
+
+# --- 项目基本信息 ---
+project:
+  name: "Academic Research Flow"
+  version: "0.2.0"
+  description: "从选题分析到文献综述的本地科研自动化文献检索与总结工作流"
+
+# --- API 配置 (敏感信息请在 .env 中设置) ---
+apis:
+  openalex:
+    base_url: "https://api.openalex.org"
+    mailto: ""  # 从环境变量 OPENALEX_MAILTO 读取
+    per_page: 200  # 每页最大条数
+    max_pages: 5  # 每次查询最多获取 5 页 (1000 条)
+    rate_limit_sleep: 0.1  # 礼貌延迟 (秒)
+
+  crossref:
+    base_url: "https://api.crossref.org"
+    rate_limit_sleep: 0.2
+
+  semantic_scholar:
+    base_url: "https://api.semanticscholar.org/graph/v1"
+    rate_limit_sleep: 1.0  # 免费层 1 req/s
+    max_retries: 3
+
+  deepseek:
+    base_url: "https://api.deepseek.com"
+    model: "deepseek-chat"
+    max_tokens: 4096
+    temperature: 0.3  # 学术场景用低温，减少幻觉
+
+  easyscholar:
+    base_url: "https://www.easyscholar.cc/open/getPublicationInfo"
+    rate_limit_sleep: 1.0  # 每秒 1 次请求
+    cache_file: "easyscholar_cache.json"  # 本地缓存文件
+
+# --- 检索配置 ---
+search:
+  classic_year_range: [2000, 2022]  # 经典文献年份范围
+  recent_year_range: [2023, 2026]   # 近年文献年份范围
+  classic_count: 30
+  recent_count: 30
+  competition_count: 20
+  classic_lookback_years: 20  # 经典文献回溯年数 (从 from_year 往前推)
+  max_search_terms: 15  # 单次最多使用的检索词数量
+  enable_concept_filter: true  # 是否启用 concept filter 排除噪音
+  enable_snowballing: true  # 是否启用引用追溯
+
+  # 噪音 Concept IDs (OpenAlex)
+  noise_concept_ids:
+    - "C2777034668"   # greenhouse gas
+    - "C132651083"    # climate change
+    - "C39432304"     # carbon dioxide emissions
+    - "C188147891"    # carbon footprint
+    - "C4773731"      # global warming
+
+  # 文献分层规则
+  tiers:
+    classic: "经典基础文献"
+    recent: "近年前沿文献"
+    competition: "直接竞争文献"
+    support: "可引用支撑文献"
+    method: "方法参考文献"
+    application: "工程应用文献"
+    background: "背景支撑文献"
+    noise: "噪音文献"
+
+# --- 排序权重 ---
+ranking:
+  relevance_weight: 0.45
+  citation_weight: 0.25
+  recency_weight: 0.20
+  validity_weight: 0.10
+
+  # 关键词类型权重 (用于相关性评分)
+  keyword_type_weights:
+    research_object: 3.0    # 研究对象词
+    research_method: 2.0    # 研究方法词
+    application_scenario: 1.5  # 应用场景词
+    innovation_point: 1.0   # 创新点词
+
+# --- 输出配置 ---
+output:
+  base_dir: "outputs"
+
+# --- 去重配置 ---
+dedup:
+  title_similarity_threshold: 0.85  # 标题相似度阈值
+
+# --- Snowballing 配置 ---
+snowballing:
+  max_forward_citations: 20   # 前向引用最大检索数
+  max_backward_citations: 30  # 后向引用最大检索数
+  top_n_seeds: 10             # 用于 seed 的 Top N 文献
+
+# --- 日志配置 ---
+logging:
+  level: "INFO"
+  format: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+  file: "outputs/pipeline.log"

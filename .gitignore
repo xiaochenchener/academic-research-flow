@@ -1,0 +1,32 @@
+# 虚拟环境
+.venv/
+
+# 环境变量 (含 API Key)
+.env
+
+# 输出目录
+outputs/
+
+# easyScholar 缓存
+easyscholar_cache.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
