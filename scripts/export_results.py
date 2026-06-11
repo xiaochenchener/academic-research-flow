@@ -22,14 +22,6 @@ from enrich_journal_info import format_journal_info
 logger = logging.getLogger(__name__)
 
 
-def _sanitize_filename(name: str) -> str:
-    """清理文件名."""
-    import re
-    name = re.sub(r'[<>:"/\\|?*]', '_', name)
-    name = name.strip().replace(' ', '_')[:50]
-    return name
-
-
 def save_json(data: dict | list, filepath: Path, indent: int = 2) -> None:
     """保存 JSON 文件."""
     filepath.parent.mkdir(parents=True, exist_ok=True)
