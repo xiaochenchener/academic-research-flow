@@ -1,0 +1,14 @@
+[project]
+name = "academic-research-flow"
+version = "0.2.0"
+description = "一杯咖啡的功夫，完成一篇文献综述 —— 本地学术文献检索与综述生成工作流"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "xiaochenchener" }
+]
+keywords = ["academic", "literature-review", "research", "openalex", "deepseek", "paper-search"]
+
+[project.urls]
+Repository = "https://github.com/xiaochenchener/academic-research-flow"

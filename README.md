@@ -262,10 +262,20 @@ academic-research-flow/
 │   └── config_loader.py
 ├── skill/                 # Claude Code Skill 定义
 │   ├── SKILL.md
-│   ├── prompts/           # 8 个 Prompt 模板
+│   ├── prompts/           # 7 个 Prompt 模板
 │   └── examples/          # 3 个领域示例
 └── tests/
 ```
+
+---
+
+## Disclaimer
+
+本项目用于辅助文献检索、文献筛选、综述草稿生成和研究思路整理，不能替代人工阅读、引用核验和学术判断。所有 AI 生成内容在正式写入论文、报告或项目申请书前，必须由用户核对原文、DOI、作者、期刊、发表年份和研究结论。
+
+## Security Notice
+
+请不要将 `.env`、API Key、数据库账号、学校 VPN 账号或任何私人凭据提交到 GitHub。如果你不小心提交了密钥，请立即删除该密钥并在对应平台重置。
 
 ---
 

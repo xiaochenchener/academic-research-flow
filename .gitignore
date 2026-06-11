@@ -1,5 +1,6 @@
 # 虚拟环境
 .venv/
+venv/
 
 # 环境变量 (含 API Key)
 .env
@@ -27,6 +28,7 @@ build/
 
 # macOS
 .DS_Store
+__MACOSX/
 
 # Logs
 *.log
