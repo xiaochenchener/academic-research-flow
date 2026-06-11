@@ -52,7 +52,7 @@
 **前置要求**：Python 3.10+、pip 23.0+。macOS 只有 `python3` 命令，下同。
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/academic-research-flow.git
+git clone https://github.com/xiaochenchener/academic-research-flow.git
 cd academic-research-flow
 python3 -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate.ps1
