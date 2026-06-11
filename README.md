@@ -4,46 +4,32 @@
 
 面向硕士/博士论文写作、开题报告、文献综述、创新点论证和论文引用整理。
 
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 ---
 
 ## 目录
 
-- [这个工具能做什么](#这个工具能做什么)
-- [快速开始](#快速开始)
+- [功能特性](#功能特性)
 - [环境准备](#环境准备)
-- [第一步：安装](#第一步安装)
-- [第二步：配置 API（可选）](#第二步配置-api可选)
+- [安装](#安装)
+- [配置 API（可选）](#配置-api可选)
 - [三种运行方式](#三种运行方式)
-- [命令行参数速查](#命令行参数速查)
 - [输出文件详解](#输出文件详解)
+- [命令行参数速查](#命令行参数速查)
+- [如何在 Claude Code 中使用](#如何在-claude-code-中使用)
 - [配置调优](#配置调优)
 - [如何解读结果](#如何解读结果)
 - [最佳实践](#最佳实践)
 - [故障排查](#故障排查)
+- [项目结构](#项目结构)
+- [License](#license)
+- [致谢](#致谢)
 
 ---
 
-## 快速开始
-
-安装完成后，最简单的使用方式：
-
-```bash
-# 方式 1: 交互式问答（最推荐，一个命令都不用记）
-./run.sh
-
-# 方式 2: 一行命令直接搜
-./run.sh "双层日光温室热湿环境动态模型"
-
-# 方式 3: 带创新点验证
-./run.sh "相变电热地板" "新型微胶囊PCM封装"
-
-# 方式 4: 在 Claude Code 中直接说
-#   "帮我检索双层日光温室热湿环境动态模型的文献"
-```
-
-`run.sh` 自动处理所有复杂操作：激活虚拟环境、检查配置、引导参数。
-
-> 💡 第一次运行如果提示 `.env` 不存在，不用管——没有 AI 功能也能搜索和导出文献。想要 AI 综述的话，花 2 分钟配置 DeepSeek API Key。参见 [第二步：配置 API](#第二步配置-api可选)。
+## 功能特性
 
 1. **选题分析** — 识别研究对象、研究方法、应用场景，判断关键词是否有歧义
 2. **关键词拆解** — 自动生成四类关键词矩阵（研究对象/方法/场景/创新点）
@@ -87,79 +73,37 @@
 
 ---
 
-## 第一步：安装
-
-### 1.1 克隆或进入项目目录
+## 安装
 
 ```bash
-cd /Users/xiaochenchener/Documents/Studys/academic-workflow/academic-research-flow
-```
+# 1. 克隆项目
+git clone https://github.com/YOUR_USERNAME/academic-research-flow.git
+cd academic-research-flow
 
-### 1.2 创建 Python 虚拟环境
-
-```bash
-# 创建虚拟环境
+# 2. 创建虚拟环境
 python3 -m venv .venv
+source .venv/bin/activate        # macOS/Linux
+# .venv\Scripts\activate.ps1     # Windows PowerShell
 
-# 激活虚拟环境（每次使用前都需要执行）
-# 🍎 macOS / 🐧 Linux:
-source .venv/bin/activate
-# 🪟 Windows (PowerShell):
-# .venv\Scripts\Activate.ps1
-# 🪟 Windows (CMD):
-# .venv\Scripts\activate.bat
-
-# 验证：终端提示符前面应该出现 (.venv)
-which python3
-# 应该输出: .../academic-research-flow/.venv/bin/python3
-```
-
-### 1.3 安装依赖
-
-```bash
-# 🍎 macOS: 确保用虚拟环境里的 pip
+# 3. 安装依赖
 python3 -m pip install -r requirements.txt
-```
 
-安装的包及其用途：
-
-| 包名 | 用途 |
-|------|------|
-| `requests` | 所有 API 请求（OpenAlex, CrossRef, DeepSeek, Semantic Scholar, easyScholar） |
-| `pandas` | 数据处理和 Excel 导出 |
-| `openpyxl` | Excel 文件读写引擎 |
-| `python-dotenv` | 从 `.env` 文件加载 API Key |
-| `pyyaml` | 读取 `config.yaml` 配置 |
-| `tqdm` | 进度条显示 |
-| `rapidfuzz` | 标题相似度计算（去重用） |
-| `tenacity` | API 请求失败自动重试 |
-| `rich` | 终端彩色输出 |
-
-### 1.4 创建配置文件
-
-```bash
-# 复制环境变量模板
+# 4. 创建配置文件
 cp .env.example .env
 
-# 验证项目结构
-ls -la
-# 应该看到: README.md  .env  .env.example  config.yaml  requirements.txt  skill/  scripts/  outputs/  tests/
-```
-
-### 1.5 验证安装
-
-```bash
-# 运行单元测试，确保基础模块正常
+# 5. 验证安装
 python3 tests/test_pipeline.py
 ```
 
-如果看到 `🎉 All pipeline tests passed!`，说明安装成功。
+看到 `🎉 All pipeline tests passed!` 即安装成功。
+
+> 🍎 **macOS 用户**：macOS 只有 `python3`，没有 `python` 命令。
+
+> 💡 **不用配 API 也能用**：即使跳过下一步，也能完成文献检索和导出。配置 API 只是解锁 AI 综述、引用句生成和影响因子查询。
 
 ---
 
-## 第二步：配置 API（可选）
-
-> 💡 **即使不配置任何 API，也能用 `run.sh` 完成文献检索和导出。** API 配置只是解锁 AI 功能（选题分析、综述写作、引用句生成）+ 期刊影响因子。
+## 配置 API（可选）
 
 ### DeepSeek API（解锁 AI 功能）
 
@@ -564,6 +508,12 @@ academic-research-flow/
     ├── test_deepseek.py
     └── test_pipeline.py
 ```
+
+---
+
+## License
+
+MIT License — 详见 [LICENSE](LICENSE) 文件。
 
 ---
 
