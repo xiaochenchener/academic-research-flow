@@ -134,7 +134,7 @@ def _extract_search_terms(keyword_matrix: dict, topic: str, config: dict) -> lis
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Academic Research Flow - 学术文献自动化工作流",
+        description="☕ Academic Research Flow — 一杯咖啡的功夫，完成一篇文献综述",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
 

@@ -1,8 +1,8 @@
-# Academic Research Flow
+# ☕ Academic Research Flow
 
-从选题分析到文献综述的**本地科研自动化文献检索与总结工作流**。
+> **一杯咖啡的功夫，完成一篇文献综述。**
 
-面向硕士/博士论文写作、开题报告、文献综述、创新点论证和论文引用整理。
+面向硕士/博士的本地科研自动化工作流：选题分析 → 文献检索 → 分类排序 → 综述生成，全程自动。
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)

@@ -41,8 +41,8 @@ activate_venv() {
 banner() {
     echo ""
     echo -e "${BLUE}╔══════════════════════════════════════════╗${NC}"
-    echo -e "${BLUE}║      ${GREEN}Academic Research Flow${BLUE}              ║${NC}"
-    echo -e "${BLUE}║      ${CYAN}学术文献检索与总结工具${BLUE}              ║${NC}"
+    echo -e "${BLUE}║      ${GREEN}☕ Academic Research Flow${BLUE}          ║${NC}"
+    echo -e "${BLUE}║   ${CYAN}一杯咖啡的功夫，完成一篇文献综述${BLUE}       ║${NC}"
     echo -e "${BLUE}╚══════════════════════════════════════════╝${NC}"
     echo ""
 }

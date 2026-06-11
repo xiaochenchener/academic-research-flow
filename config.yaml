@@ -6,7 +6,7 @@
 project:
   name: "Academic Research Flow"
   version: "0.2.0"
-  description: "从选题分析到文献综述的本地科研自动化文献检索与总结工作流"
+  description: "一杯咖啡的功夫，完成一篇文献综述 —— 从选题分析到文献综述的本地自动化工作流"
 
 # --- API 配置 (敏感信息请在 .env 中设置) ---
 apis:
